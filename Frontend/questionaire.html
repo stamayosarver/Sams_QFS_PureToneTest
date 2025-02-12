@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Questionnaire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold text-center mb-4">Questionnaire</h1>
+    <!-- Embedded Google Form -->
+    <iframe id="questionnaire-iframe"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSezskUdul6cXsf9R0w4MJ-vakA_ZHByRgHyymgi1BQagk2LVg/viewform?usp=pp_url&entry.404958165=%3CTest+Data%3E"
+            width="640"
+            height="3033"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0">
+      Loading...
+    </iframe>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Retrieve the hearing result from query parameters or localStorage.
+      var urlParams = new URLSearchParams(window.location.search);
+      var hearingResult = urlParams.get("hearingResult") || localStorage.getItem("hearingResult") || "";
+      
+      if (hearingResult) {
+        // Build a new URL for the Google Form with the hearing result pre-filled.
+        var baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSezskUdul6cXsf9R0w4MJ-vakA_ZHByRgHyymgi1BQagk2LVg/viewform";
+        var params = new URLSearchParams({
+          "usp": "pp_url",
+          "entry.404958165": hearingResult
+        });
+        params.append("embedded", "true");
+        
+        // Update the iframe's src URL with the new pre-filled value.
+        document.getElementById("questionnaire-iframe").src = baseUrl + "?" + params.toString();
+      }
+    });
+  </script>
+</body>
+</html> 
